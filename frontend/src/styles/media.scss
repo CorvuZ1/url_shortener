@@ -1,0 +1,13 @@
+@use "../styles/variables.scss" as variables;
+
+@mixin vw-medium {
+  @media (max-width: variables.$breakpoint-medium) {
+    @content;
+  }
+}
+
+@mixin vw-small {
+  @media (max-width: variables.$breakpoint-small) {
+    @content;
+  }
+}

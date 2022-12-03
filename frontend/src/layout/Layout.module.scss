@@ -1,0 +1,31 @@
+@use "../styles/variables.scss" as variables;
+@use "../styles/media.scss" as media;
+
+.root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex-grow: 1;
+  padding-top: variables.$layout-padding-vertical;
+  padding-bottom: variables.$layout-padding-vertical;
+
+  @include media.vw-medium {
+    padding-top: variables.$layout-padding-vertical-m;
+    padding-bottom: variables.$layout-padding-vertical-m;
+  }
+  
+  @include media.vw-small {
+    padding-top: variables.$layout-padding-vertical-s;
+    padding-bottom: variables.$layout-padding-vertical-s;
+  }
+}
+
+.line {
+  width: 100%;
+  height: 35px;
+  background-color: variables.$light-dark;
+  flex-grow: 0;
+}

@@ -1,0 +1,83 @@
+@use "../../styles/variables.scss" as variables;
+
+.root {
+  border: 1px solid variables.$dark-gray;
+  background-color: white;
+  border-radius: 4px;
+  padding: 14px;
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+.item {
+  display: flex;
+  flex-wrap: wrap;
+
+  &--small {
+    font-size: 14px;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 7px;
+  }
+
+  &:nth-child(2) {
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid variables.$dark-gray;
+  }
+}
+
+.link,
+.value {
+  font-weight: 500;
+}
+
+.key {
+  margin-right: 6px;
+  color: variables.$light-gray;
+}
+
+.link {
+  color: variables.$light-blue;
+  word-break: break-all;
+}
+
+.buttons-container {
+  position: absolute;
+  right: -35px;
+  top: 8px;
+}
+
+.qr-code {
+  padding: 15px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.float-button {
+  display: block;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  background-color: transparent;
+  border-radius: 0 5px 5px 0;
+
+  &--qr-code {
+    border: 1px solid black;
+    border-left: 0;
+  }
+
+  &--delete {
+    border: 1px solid variables.$light-red;
+    border-left: 0;
+    margin-top: 2px;
+  }
+}
+
+.delete-icon {
+  color: variables.$light-red;
+}

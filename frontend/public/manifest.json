@@ -1,0 +1,15 @@
+{
+  "short_name": "URLshortener",
+  "name": "URLshortener",
+  "icons": [
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "129x129"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
