@@ -3,6 +3,6 @@ const { redirectToLongUrl } = require("../controllers/redirect");
 
 const router = Router();
 
-router.get("/:id", redirectToLongUrl)
+router.get("/:id", redirectToLongUrl);
 
 module.exports = router;
