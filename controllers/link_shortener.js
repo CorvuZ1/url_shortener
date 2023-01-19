@@ -1,9 +1,8 @@
-
 const isURL = require("validator/lib/isURL");
 const { customAlphabet } = require("nanoid");
 const Link = require("../models/Link");
 
-async function createShortLink(req, res)  {
+async function createShortLink(req, res) {
   try {
     const { URL, REDIRECT_URL, CUSTOM_ALPHABET, ALPHABET_LENGTH } = process.env;
     const { longUrl, customShortId } = req.body;
@@ -15,17 +14,25 @@ async function createShortLink(req, res)  {
     }
 
     if (!longUrl.startsWith(REDIRECT_URL)) {
-      errors.push({ error: true, message: `Ссылка должна начинаться с ${REDIRECT_URL}` });
+      errors.push({
+        error: true,
+        message: `Ссылка должна начинаться с ${REDIRECT_URL}`
+      });
     }
 
     const alreadyUsedLongUrl = await Link.findOne({ longUrl });
     if (alreadyUsedLongUrl) {
       errors.push({ error: true, message: "Такая длинная ссылка уже есть" });
     }
-    
-    const alreadyUsedShortUrl = await Link.findOne({ shortUrl: `${URL}/${shortId}` });
+
+    const alreadyUsedShortUrl = await Link.findOne({
+      shortUrl: `${URL}/${shortId}`
+    });
     if (alreadyUsedShortUrl) {
-      errors.push({ error: true, message: "Такой короткий идентификатор уже есть" });
+      errors.push({
+        error: true,
+        message: "Такой короткий идентификатор уже есть"
+      });
     }
 
     if (errors.length > 0) {
@@ -35,25 +42,27 @@ async function createShortLink(req, res)  {
     if (!shortId) {
       const nanoid = customAlphabet(CUSTOM_ALPHABET, parseInt(ALPHABET_LENGTH));
       shortId = nanoid();
-    } 
+    }
 
     await new Link({
       longUrl,
       shortUrl: `${URL}/${shortId}`
     }).save();
 
-    res.status(201).json({ error: false, message: "Короткая ссылка успешно создана" });
-  } catch(error) {
-    console.log(error)
+    res
+      .status(201)
+      .json({ error: false, message: "Короткая ссылка успешно создана" });
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ error: true, message: "Что-то пошло не так" });
   }
 }
 
-async function getAllElements(req, res)  {
+async function getAllElements(req, res) {
   try {
     const elements = await Link.find({});
     res.status(200).json({ errors: false, payload: elements });
-  } catch(error) {
+  } catch (error) {
     console.log(error);
     res.status(500).json({ error: true, message: "Что-то пошло не так" });
   }
@@ -63,7 +72,7 @@ async function deleteElement(req, res) {
   try {
     await Link.findByIdAndDelete(req.params.id);
     res.status(200).json({ error: false, message: "Успешно удалено" });
-  } catch(error) {
+  } catch (error) {
     console.log(error);
     res.status(500).json({ error: true, message: "Что-то пошло не так" });
   }
